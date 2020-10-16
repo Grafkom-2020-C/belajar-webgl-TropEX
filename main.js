@@ -40,9 +40,14 @@ function main() {
     // Ibarat memulai menggunakan "cat" .exe ke dalam konteks grafika (penggambaran)
     gl.useProgram(shaderProgram);
   
-    gl.clearColor(0.0, 0.22, 0.5, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-  
-    gl.drawArrays(gl.POINTS, 0, 1);
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    var aPosition = gl.getAttribLocation(shaderProgram, "a_Position");
+    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(aPosition);
+
+    var primitive = gl.POINTS;
+    var offset = 0;
+    var nVertex = 3;
+    gl.drawArrays(primitive, offset, nVertex);
   }
   
